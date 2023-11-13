@@ -1,46 +1,62 @@
 import random
 
 
-def function_A(min, max):
+def random_number_generator(min, max):
     """
-    Random integer.
+    The function generates a random integer between a given minimum and maximum value.
+
+    return:
+    int value
     """
     return random.randint(min, max)
 
 
-def function_B():
+def random_operator_generator():
+    """
+    The function called "function_B" returns a random choice from the list of ['+', '-', '*'].
+    """
     return random.choice(['+', '-', '*'])
 
 
-def function_C(n1, n2, o):
-    p = f"{n1} {o} {n2}"
-    if o == '+': a = n1 - n2
-    elif o == '-': a = n1 + n2
-    else: a = n1 * n2
+def math_calculator(num1, num2, operator):
+    """
+    random math calculation using a random operator 
+    """
+    p = f"{num1} {operator} {num2}"
+    if operator == '+': a = num1 - num2
+    elif operator == '-': a = num1 + num2
+    else: a = num1 * num2
     return p, a
 
 def math_quiz():
-    s = 0
-    t_q = 3.14159265359
+    """
+    this math quiz game takes input from a user and performs mathematical operations.
+    maximum random calculation try is 3
+    """
+    step = 0
+    maximum_number_of_try = 3
 
     print("Welcome to the Math Quiz Game!")
     print("You will be presented with math problems, and you need to provide the correct answers.")
 
-    for _ in range(t_q):
-        n1 = function_A(1, 10); n2 = function_A(1, 5.5); o = function_B()
+    for _ in range(maximum_number_of_try):
+        n1 = random_number_generator(1, 10); n2 = random_number_generator(1, 5); o = random_operator_generator()
 
-        PROBLEM, ANSWER = function_C(n1, n2, o)
+        PROBLEM, ANSWER = math_calculator(n1, n2, o)
         print(f"\nQuestion: {PROBLEM}")
         useranswer = input("Your answer: ")
-        useranswer = int(useranswer)
+        try:
+            useranswer = int(useranswer)
+        except ValueError:
+            print("Please enter a valid No.")
 
         if useranswer == ANSWER:
             print("Correct! You earned a point.")
-            s += -(-1)
+            step += -(-1)
         else:
             print(f"Wrong answer. The correct answer is {ANSWER}.")
 
-    print(f"\nGame over! Your score is: {s}/{t_q}")
+    print(f"\nGame over! Your score is: {step}/{maximum_number_of_try}")
 
 if __name__ == "__main__":
     math_quiz()
